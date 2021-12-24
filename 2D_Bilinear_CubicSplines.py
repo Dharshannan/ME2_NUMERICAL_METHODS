@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+np.seterr(over='ignore')
 
 flower = plt.imread('Flower.jpg')
 #plt.imshow(flower)
