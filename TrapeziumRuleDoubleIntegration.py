@@ -6,7 +6,7 @@ def trapseqd(xt,yt):
     b = xt[n-1]
     a = xt[0]
     mid_sum = 0
-    for i in range(1, n-2):
+    for i in range(1, n-1):
         mid_sum += yt[i]  
     trp = ((b-a)/(n-1))*(yt[0]*0.5 + yt[n-1]*0.5 + mid_sum)
     return(trp)
