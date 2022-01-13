@@ -10,14 +10,14 @@ M = np.array([[0,1],[-9,-0.1]])
 
 def RK4(A,y_0):
     temp = y_0
-   y_poop = []
-   for k in range(len(y_0)):
+    y_poop = []
+    for k in range(len(y_0)):
        y_poop.append([])
 
-   for n in range(0,len(y_0)):
+    for n in range(0,len(y_0)):
        y_poop[n].append(y_0[n])
 
-   for i in range(0, len(t)-1):
+    for i in range(0, len(t)-1):
        k1 = h*np.matmul(A,temp)
        k2 = h*np.matmul(A,temp + 0.5*k1)
        k3 = h*np.matmul(A,temp + 0.5*k2)
