@@ -25,6 +25,7 @@ indices = yf_abs > 300 #(this value 300 is based of f domain plot)
 yf_clean = indices * yf
 #plt.plot(xf, np.abs(yf_clean))
 
+# Inverse fourier transform
 clean = irfft(yf_clean)
 plt.plot(x,clean)
 
