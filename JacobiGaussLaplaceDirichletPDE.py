@@ -66,7 +66,7 @@ for k in range(10): # Number of iterations
         
 print(u)'''
 # Gauss Seidel :
-u = [0,0,0,0,0,0,0,0,0] # initial guess (make sure it is the same size as M)
+'''u = [0,0,0,0,0,0,0,0,0] # initial guess (make sure it is the same size as M)
 for k in range(20): # Number of iterations
     for i in range(0, len(u)):
         sum_u = 0
@@ -75,7 +75,22 @@ for k in range(20): # Number of iterations
                 sum_u += M[i][j] * u[j]
         u[i] = (B[i] - sum_u)/M[i][i]
         
-#print(u) 
+print(u)'''
+# Gauss Seidel with Relaxation:
+l = 1.5 # Lambda, relaxation constant
+u = [0,0,0,0,0,0,0,0,0] # initial guess (make sure it is the same size as M)
+temp = [i for i in u]
+for k in range(20): # Number of iterations
+    for i in range(0, len(u)):
+        sum_u = 0
+        for j in range(0, len(u)):
+            if j != i:
+                sum_u += M[i][j] * u[j]
+        u[i] = (B[i] - sum_u)/M[i][i]
+        u[i] = l*u[i] + (1-l)*temp[i]
+    temp = [i for i in u]
+           
+#print(u)
 
 list2 = list(zip(eva,u))
 for i in range(0, len(list2)):
