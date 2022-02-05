@@ -73,7 +73,7 @@ for i in range(0,non_nue):
 c = non_nue
 for i in range(0,len(neumann)):
     s, t = neumann[i]
-    B[c] = (h**2)*x[t]*y[s] - 6*h*y[s] # Change this based of the RHS of Poisson equation as well
+    B[c] = (h**2)*x[t]*y[s] - 6*h*y[s] # Change this based of the RHS of Poisson equation as well and Nuemann condition
     nuenue = [(s,t),(s,t+1)]
     for j in range(0, k):
         if eva[j] in nuenue:
