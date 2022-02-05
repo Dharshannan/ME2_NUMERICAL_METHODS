@@ -4,10 +4,10 @@ from matplotlib import cm
 from mpl_toolkits import mplot3d
 # Lets define both Nuemann and Dirichlet conditions
 # Poisson : u(xx) + u(yy) = xy
-grid_points = np.zeros((7,7)) # Stencil of points
+grid_points = np.zeros((11,11)) # Stencil of points
 h = 0.5 # Step size
-x = np.arange(0,3+h,h) # Change x,y to fit the meshgrid from the stencil
-y = np.arange(0,3+h,h)
+x = np.arange(0,5+h,h) # Change x,y to fit the meshgrid from the stencil
+y = np.arange(0,5+h,h)
 m,n = len(grid_points) - 1, len(grid_points[0]) - 1
 # Dirichlet
 for i in range(0,len(grid_points)):
@@ -43,7 +43,7 @@ B = np.zeros(k)
 a = 0
 for i in range(1,m):
     for j in range(1,n):
-        B[a] = (h**2)*x[j]*y[i]
+        B[a] = (h**2)*x[j]*y[i] # Change this based of RHS Poisson Equation
         a += 1
 
 sumb = []
