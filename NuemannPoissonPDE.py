@@ -8,7 +8,6 @@ h = 0.2 # Step size
 x = np.arange(0,3+h,h) # Change x,y to fit the meshgrid of the required stencil
 y = np.arange(0,3+h,h)
 grid_points = np.zeros((len(y),len(x))) # Stencil of points
-print(grid_points.shape)
 m,n = len(grid_points) - 1, len(grid_points[0]) - 1
 # Dirichlet
 for i in range(0,len(grid_points)):
@@ -111,7 +110,7 @@ for i in range(0, len(list2)):
     p, q = list2[i][0]
     grid_points[p][q] = list2[i][1]
     
-#print(grid_points) # Prints out the meshgrid with the values of each point
+print(grid_points) # Prints out the meshgrid with the values of each point
 
 # Lets surface plot this shit :)
 
