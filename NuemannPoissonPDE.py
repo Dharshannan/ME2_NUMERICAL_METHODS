@@ -4,10 +4,11 @@ from matplotlib import cm
 from mpl_toolkits import mplot3d
 # Lets define both Nuemann and Dirichlet conditions
 # Poisson : u(xx) + u(yy) = xy
-grid_points = np.zeros((11,11)) # Stencil of points
-h = 0.5 # Step size
-x = np.arange(0,5+h,h) # Change x,y to fit the meshgrid from the stencil
-y = np.arange(0,5+h,h)
+h = 0.2 # Step size
+x = np.arange(0,3+h,h) # Change x,y to fit the meshgrid of the required stencil
+y = np.arange(0,3+h,h)
+grid_points = np.zeros((len(y),len(x))) # Stencil of points
+print(grid_points.shape)
 m,n = len(grid_points) - 1, len(grid_points[0]) - 1
 # Dirichlet
 for i in range(0,len(grid_points)):
@@ -110,7 +111,7 @@ for i in range(0, len(list2)):
     p, q = list2[i][0]
     grid_points[p][q] = list2[i][1]
     
-print(grid_points) # Prints out the meshgrid with the values of each point
+#print(grid_points) # Prints out the meshgrid with the values of each point
 
 # Lets surface plot this shit :)
 
