@@ -91,3 +91,10 @@ def Gauss(M,B,u,l,err): # l is lambda (relaxation factor), err is relative error
 U, N = Gauss(M,B,u,1.1,1) # set l as 1 for standard Guass Seidel
 print('U Values:', U)
 print('Number of iterations:', N)
+
+list2 = list(zip(eva,U))
+for i in range(0, len(list2)):
+    x, y = list2[i][0]
+    grid_points[x][y] = list2[i][1]
+    
+print(grid_points) # Prints out the meshgrid with the values of each point
