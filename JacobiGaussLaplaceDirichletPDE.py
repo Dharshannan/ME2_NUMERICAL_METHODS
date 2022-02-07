@@ -92,6 +92,32 @@ for k in range(20): # Number of iterations
            
 #print(u)
 
+# Gauss Seidel with Relaxation Function:
+'''u = [0,0,0,0] # initial guess (make sure it is the same size as M)
+def Gauss(M,B,u,l,err): # l is lambda (relaxation factor), err is relative error in %
+    Exit = 0
+    n = 0 # Number of iterations
+    while Exit != 1:
+        temp = u.copy()
+        for i in range(0, len(u)):
+            sum_u = 0
+            for j in range(0, len(u)):
+                if j != i:
+                    sum_u += M[i][j] * u[j]
+            u[i] = (B[i] - sum_u)/M[i][i]
+            u[i] = l*u[i] + (1-l)*temp[i]
+        Pass = 0
+        for j in range(0, len(u)):
+            if abs((u[j] - temp[j])/(u[j]))*100 < err:
+                Pass += 1
+        if Pass == len(u):
+            Exit = 1
+        else:
+            Exit = 0
+        n += 1
+        
+    return(u,n)'''
+
 list2 = list(zip(eva,u))
 for i in range(0, len(list2)):
     x, y = list2[i][0]
