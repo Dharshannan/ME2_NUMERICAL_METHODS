@@ -6,8 +6,8 @@ from mpl_toolkits import mplot3d
 # Lets define both Nuemann and Dirichlet conditions
 # Poisson : u(xx) + u(yy) = xy
 h = 0.1 # Step size
-x = np.arange(0,1.5+h,h) # Change x,y to fit the meshgrid of the required stencil
-y = np.arange(0,1.5+h,h)
+x = np.arange(0,3+h,h) # Change x,y to fit the meshgrid of the required stencil
+y = np.arange(0,3+h,h)
 grid_points = np.zeros((len(y),len(x))) # Stencil of points
 m,n = len(grid_points) - 1, len(grid_points[0]) - 1
 # Dirichlet
@@ -18,7 +18,7 @@ for i in range(0,len(grid_points)):
         grid_points[i][n] = 0
 #print(grid_points)
 # Lets assume that Nuemann conditions can only apply at a max of 2 surfaces(Grid faces)
-# Neumann (lets apply this at the left surface):  (*you can apply Neumann at the right side as well with a little cahnges to the code)
+# Neumann (lets apply this at the left surface):  (*you can apply Neumann at the right side as well with a little changes to the code)
 # Lets define all points to be evaluated including Neumann boundary condition points
 # Points to evaluate
 eva = []
@@ -80,8 +80,8 @@ while Exit != 1: # Iterate until error for each point has reached err tolerance 
         Exit = 0
     itr += 1
 
-print(G)
-
+print(G) # Prints out the meshgrid with the values of each point
+#print(itr) # Prints number of iterations
 # Lets surface plot this shit :)
 
 X, Y = np.meshgrid(x,y)
