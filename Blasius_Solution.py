@@ -81,7 +81,7 @@ tol = 1e-5 # tolerance value for the error
 itmax = 1000 # max number of iterations
 error = 100 # set initial error as large
 it = 0 # initialise the number of iteartions
-ghlist = [(gold,hold)]
+ghlist = [(gold,hold)] # to hold g,h values for each iteration for n_th order polynomial interpolation
 while (error > tol) and (it < itmax):
     it += 1 # increment number of iterations
     # Lets RK4 this shit mate, hell yea :)
@@ -105,9 +105,9 @@ while (error > tol) and (it < itmax):
     h0 = Lagrange(ghsorted[:,0], ghsorted[:,1], g_inf)
     # Calculate the error
     error = abs(G[-1] - g_inf)
+print("Iterations required:", it)
 
-
-# function for trapezium
+# function for trapezium rule integration
 def trapz(xt,yt):
     n = len(xt)
     b = xt[n-1]
