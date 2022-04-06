@@ -15,7 +15,7 @@ x = np.arange(0,24.5+h,h) # Width of domain(laptop) discretised into points
 y = np.arange(0,24.5+h,h) # Height of domain(laptop) discretised
 Tgen = 80 # CPU chip temperature
 Tinf = 10 # Cooling liquid temperature
-Tcool = 10 # Cooling fan temperature
+Tcool = 15 # Cooling fan temperature
 # Populate an initial stencil
 grid_points = np.zeros((len(y),len(x))) # Stencil of points
 m,n = len(grid_points) - 1, len(grid_points[0]) - 1
@@ -105,7 +105,7 @@ for l in range(len(t)):
     for i in range(0,len(neumann)):
         s, p = neumann[i]
         B[c] = r*(g[s+1][p] + g[s-1][p] + 2*g[s][p+1] + (4*h*H/K)*Tinf) + (2 - 4*r - (2*h*H/K)*r)*(g[s][p]) # Nuemann for which -k*dT/dn = h(T-Tinf)
-        nuenue = [(s,p),(s,p+1)]
+        nuenue = [(s,p+1)]
         for j in range(0, k):
             if eva[j] in nuenue:
                 M[c][j] = -2*r
@@ -114,8 +114,11 @@ for l in range(len(t)):
             if (s-1,p) in neumann:
                 M[c][non_nue+(i-1)] = -1*r
         c += 1
-                
-    for i in range(0,k):
+    # Dioganalize M for non-nuemann points          
+    for i in range(0,non_nue):
+        M[i][i] = (2 + 4*r)
+    # Dioganalize M for nuemann points
+    for i in range(non_nue,k):
         M[i][i] = (2 + 4*r + (2*h*H/K)*r)
         
     # Update B matrix again based off Dirichlet boundary conditions (# A more generalized approach)
