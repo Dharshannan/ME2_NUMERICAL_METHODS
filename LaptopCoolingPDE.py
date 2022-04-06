@@ -104,7 +104,7 @@ for l in range(len(t)):
     c = non_nue
     for i in range(0,len(neumann)):
         s, p = neumann[i]
-        B[c] = r*(g[s+1][p] + g[s-1][p] + 2*g[s][p+1] + (4*h*H/K)*Tinf) + (2 - 4*r - (2*h*H/K)*r)*(g[s][p]) # Nuemann for which -k*du/dn = h(T-Tinf)
+        B[c] = r*(g[s+1][p] + g[s-1][p] + 2*g[s][p+1] + (4*h*H/K)*Tinf) + (2 - 4*r - (2*h*H/K)*r)*(g[s][p]) # Nuemann for which -k*dT/dn = h(T-Tinf)
         nuenue = [(s,p),(s,p+1)]
         for j in range(0, k):
             if eva[j] in nuenue:
