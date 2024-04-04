@@ -6,11 +6,11 @@ from collections import deque
 m1 = 1
 m2 = 1
 l1 = 1
-l2 = 1
+l2 = 0.5
 L = l1 + l2
 g = 9.81
 h = 0.002
-t = np.arange(0,10,h)
+t = np.arange(0,15,h)
 history_len = 500 
 
 def y_diff1(y_1,y_2,y_3,y_4,m1,m2,l1,l2,g):
@@ -46,25 +46,48 @@ def RK4():
     y3 = [y_3]
     y4 = [y_4]
     for i in range(0, len(t)-1):
+# =============================================================================
+#         ## Wrong Implementation ##
+#         k1_1 = h*y_diff1(temp1, temp2, temp3, temp4, m1, m2, l1, l2, g)
+#         k2_1 = h*y_diff1(temp1 + 0.5*k1_1, temp2, temp3, temp4, m1, m2, l1, l2, g)
+#         k3_1 = h*y_diff1(temp1 + 0.5*k2_1, temp2, temp3, temp4, m1, m2, l1, l2, g)
+#         k4_1 = h*y_diff1(temp1 + k3_1, temp2, temp3, temp4, m1, m2, l1, l2, g)
+#         
+#         k1_2 = h*y_diff2(temp1, temp2, temp3, temp4, m1, m2, l1, l2, g)
+#         k2_2 = h*y_diff2(temp1, temp2 + 0.5*k1_2, temp3, temp4, m1, m2, l1, l2, g)
+#         k3_2 = h*y_diff2(temp1, temp2 + 0.5*k2_2, temp3, temp4, m1, m2, l1, l2, g)
+#         k4_2 = h*y_diff2(temp1, temp2 + k3_2, temp3, temp4, m1, m2, l1, l2, g)
+#         
+#         k1_3 = h*y_diff3(temp1, temp2, temp3, temp4, m1, m2, l1, l2, g)
+#         k2_3 = h*y_diff3(temp1, temp2, temp3 + 0.5*k1_3, temp4, m1, m2, l1, l2, g)
+#         k3_3 = h*y_diff3(temp1, temp2, temp3 + 0.5*k2_3, temp4, m1, m2, l1, l2, g)
+#         k4_3 = h*y_diff3(temp1, temp2, temp3 + k3_3, temp4, m1, m2, l1, l2, g)
+#         
+#         k1_4 = h*y_diff4(temp1, temp2, temp3, temp4, m1, m2, l1, l2, g)
+#         k2_4 = h*y_diff4(temp1, temp2, temp3, temp4 + 0.5*k1_4, m1, m2, l1, l2, g)
+#         k3_4 = h*y_diff4(temp1, temp2, temp3, temp4 + 0.5*k2_4, m1, m2, l1, l2, g)
+#         k4_4 = h*y_diff4(temp1, temp2, temp3, temp4 + k3_4, m1, m2, l1, l2, g)
+# =============================================================================
+        ## Correct Implementation ##
         k1_1 = h*y_diff1(temp1, temp2, temp3, temp4, m1, m2, l1, l2, g)
-        k2_1 = h*y_diff1(temp1 + 0.5*k1_1, temp2, temp3, temp4, m1, m2, l1, l2, g)
-        k3_1 = h*y_diff1(temp1 + 0.5*k2_1, temp2, temp3, temp4, m1, m2, l1, l2, g)
-        k4_1 = h*y_diff1(temp1 + k3_1, temp2, temp3, temp4, m1, m2, l1, l2, g)
-        
         k1_2 = h*y_diff2(temp1, temp2, temp3, temp4, m1, m2, l1, l2, g)
-        k2_2 = h*y_diff2(temp1, temp2 + 0.5*k1_2, temp3, temp4, m1, m2, l1, l2, g)
-        k3_2 = h*y_diff2(temp1, temp2 + 0.5*k2_2, temp3, temp4, m1, m2, l1, l2, g)
-        k4_2 = h*y_diff2(temp1, temp2 + k3_2, temp3, temp4, m1, m2, l1, l2, g)
-        
         k1_3 = h*y_diff3(temp1, temp2, temp3, temp4, m1, m2, l1, l2, g)
-        k2_3 = h*y_diff3(temp1, temp2, temp3 + 0.5*k1_3, temp4, m1, m2, l1, l2, g)
-        k3_3 = h*y_diff3(temp1, temp2, temp3 + 0.5*k2_3, temp4, m1, m2, l1, l2, g)
-        k4_3 = h*y_diff3(temp1, temp2, temp3 + k3_3, temp4, m1, m2, l1, l2, g)
-        
         k1_4 = h*y_diff4(temp1, temp2, temp3, temp4, m1, m2, l1, l2, g)
-        k2_4 = h*y_diff4(temp1, temp2, temp3, temp4 + 0.5*k1_4, m1, m2, l1, l2, g)
-        k3_4 = h*y_diff4(temp1, temp2, temp3, temp4 + 0.5*k2_4, m1, m2, l1, l2, g)
-        k4_4 = h*y_diff4(temp1, temp2, temp3, temp4 + k3_4, m1, m2, l1, l2, g)
+        
+        k2_1 = h*y_diff1(temp1 + 0.5*k1_1, temp2 + 0.5*k1_2, temp3 + 0.5*k1_3, temp4 + 0.5*k1_4, m1, m2, l1, l2, g)
+        k2_2 = h*y_diff2(temp1 + 0.5*k1_1, temp2 + 0.5*k1_2, temp3 + 0.5*k1_3, temp4 + 0.5*k1_4, m1, m2, l1, l2, g)
+        k2_3 = h*y_diff3(temp1 + 0.5*k1_1, temp2 + 0.5*k1_2, temp3 + 0.5*k1_3, temp4 + 0.5*k1_4, m1, m2, l1, l2, g)
+        k2_4 = h*y_diff4(temp1 + 0.5*k1_1, temp2 + 0.5*k1_2, temp3 + 0.5*k1_3, temp4 + 0.5*k1_4, m1, m2, l1, l2, g)
+        
+        k3_1 = h*y_diff1(temp1 + 0.5*k2_1, temp2 + 0.5*k2_2, temp3 + 0.5*k2_3, temp4 + 0.5*k2_4, m1, m2, l1, l2, g)
+        k3_2 = h*y_diff2(temp1 + 0.5*k2_1, temp2 + 0.5*k2_2, temp3 + 0.5*k2_3, temp4 + 0.5*k2_4, m1, m2, l1, l2, g)
+        k3_3 = h*y_diff3(temp1 + 0.5*k2_1, temp2 + 0.5*k2_2, temp3 + 0.5*k2_3, temp4 + 0.5*k2_4, m1, m2, l1, l2, g)
+        k3_4 = h*y_diff4(temp1 + 0.5*k2_1, temp2 + 0.5*k2_2, temp3 + 0.5*k2_3, temp4 + 0.5*k2_4, m1, m2, l1, l2, g)
+        
+        k4_1 = h*y_diff1(temp1 + k3_1, temp2 + k3_2, temp3 + k3_3, temp4 + k3_4, m1, m2, l1, l2, g)
+        k4_2 = h*y_diff2(temp1 + k3_1, temp2 + k3_2, temp3 + k3_3, temp4 + k3_4, m1, m2, l1, l2, g)
+        k4_3 = h*y_diff3(temp1 + k3_1, temp2 + k3_2, temp3 + k3_3, temp4 + k3_4, m1, m2, l1, l2, g)
+        k4_4 = h*y_diff4(temp1 + k3_1, temp2 + k3_2, temp3 + k3_3, temp4 + k3_4, m1, m2, l1, l2, g)
         
         y_t1 = temp1 + (1/6)*(k1_1 + 2*k2_1 + 2*k3_1 + k4_1)
         temp1 = y_t1
@@ -78,10 +101,6 @@ def RK4():
         y3.append(temp3)
     return(y1,y3)
               
-
- 
-
-    
 x1 = l1*np.sin(np.array(RK4()[0]))
 y1 = -l1*np.cos(np.array(RK4()[0]))
 
@@ -120,8 +139,3 @@ def animate(i):
 ani = animation.FuncAnimation(
     fig, animate, len(y1), interval=h*1000, blit=True)
 plt.show()
-
-
-## Note: This implementation has an error and requires editing sorry ##
-
-
